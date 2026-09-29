@@ -1,0 +1,34 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "configuracoes": {
+      ".read": true,
+      ".write": "auth != null && auth.uid === '2wfyAG4S8OW4NtQWPfHJAx0SUZQ2'"
+    },
+    "historico_votos": {
+      ".read": "auth != null && auth.uid === '2wfyAG4S8OW4NtQWPfHJAx0SUZQ2'",
+      "$votacao": {
+        ".write": "!data.exists() && newData.exists()",
+        ".validate": "newData.hasChildren(['municipio','escola','turma','data','total','votos']) && newData.child('total').val() === (newData.child('votos/10').val() + newData.child('votos/20').val() + newData.child('votos/30').val() + newData.child('votos/40').val() + newData.child('votos/50').val() + newData.child('votos/BRANCO').val() + newData.child('votos/NULO').val())",
+        "municipio": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 60" },
+        "escola": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 120" },
+        "turma": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 60" },
+        "data": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 40" },
+        "total": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 500" },
+        "votos": {
+          ".validate": "newData.hasChildren(['10','20','30','40','50','BRANCO','NULO'])",
+          "10": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 500" },
+          "20": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 500" },
+          "30": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 500" },
+          "40": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 500" },
+          "50": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 500" },
+          "BRANCO": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 500" },
+          "NULO": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 500" },
+          "$other": { ".validate": false }
+        },
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}

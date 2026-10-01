@@ -8,6 +8,7 @@
     },
     "historico_votos": {
       ".read": "auth != null && auth.uid === '2wfyAG4S8OW4NtQWPfHJAx0SUZQ2'",
+      ".write": "auth != null && auth.uid === '2wfyAG4S8OW4NtQWPfHJAx0SUZQ2' && !newData.exists()",
       "$votacao": {
         ".write": "!data.exists() && newData.exists()",
         ".validate": "newData.hasChildren(['municipio','escola','turma','data','total','votos']) && newData.child('total').val() === (newData.child('votos/10').val() + newData.child('votos/20').val() + newData.child('votos/30').val() + newData.child('votos/40').val() + newData.child('votos/50').val() + newData.child('votos/BRANCO').val() + newData.child('votos/NULO').val())",
